@@ -1,0 +1,722 @@
+[
+    {
+        "name": "$cryptoclicker_airline",
+        "icon": "",
+        "id": "airline28",
+        "profit": 8500,
+        "cost": 21000000,
+        "level": 28,
+        "profitSum": 76800,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_antique_workshop",
+        "icon": "",
+        "id": "antique_workshop40",
+        "profit": 240000,
+        "cost": 320000000,
+        "level": 40,
+        "profitSum": 864000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_art_studio",
+        "icon": "",
+        "id": "art_studio20",
+        "profit": 9000,
+        "cost": 600000,
+        "level": 20,
+        "profitSum": 31550,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_candle_factory",
+        "icon": "",
+        "id": "CandleFactory18",
+        "profit": 35400,
+        "cost": 121000000,
+        "level": 18,
+        "profitSum": 153290,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_chocolate_factory",
+        "icon": "",
+        "id": "chocolate_factory29",
+        "profit": 11500,
+        "cost": 28000000,
+        "level": 29,
+        "profitSum": 110000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_consulting_company",
+        "icon": "",
+        "id": "consulting_company30",
+        "profit": 9600,
+        "cost": 29000000,
+        "level": 30,
+        "profitSum": 96500,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_cosmetics_company",
+        "icon": "",
+        "id": "cosmetics_company27",
+        "profit": 5500,
+        "cost": 17000000,
+        "level": 27,
+        "profitSum": 61300,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_craft_brewery",
+        "icon": "",
+        "id": "craft_brewery40",
+        "profit": 180000,
+        "cost": 250000000,
+        "level": 40,
+        "profitSum": 750015,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_daiting_service",
+        "icon": "",
+        "id": "DatingService13",
+        "profit": 14400,
+        "cost": 28100000,
+        "level": 13,
+        "profitSum": 62650,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_dance_school",
+        "icon": "",
+        "id": "dance_school20",
+        "profit": 4000,
+        "cost": 350000,
+        "level": 20,
+        "profitSum": 16930,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_drone_service",
+        "icon": "",
+        "id": "DroneService10",
+        "profit": 53300,
+        "cost": 51700000,
+        "level": 10,
+        "profitSum": 213850,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_electronics_store",
+        "icon": "",
+        "id": "electronics_store40",
+        "profit": 240000,
+        "cost": 170000000,
+        "level": 40,
+        "profitSum": 969800,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_fashion_atelier",
+        "icon": "",
+        "id": "fashion_atelier20",
+        "profit": 3500,
+        "cost": 580000,
+        "level": 20,
+        "profitSum": 15950,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_flower_farm",
+        "icon": "",
+        "id": "flower_farm20",
+        "profit": 2500,
+        "cost": 180000,
+        "level": 20,
+        "profitSum": 7620,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_furniture_factory",
+        "icon": "",
+        "id": "FurnitureFactory18",
+        "profit": 65400,
+        "cost": 124000000,
+        "level": 18,
+        "profitSum": 280720,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_interior_design_studio",
+        "icon": "",
+        "id": "interior_design_studio40",
+        "profit": 240000,
+        "cost": 240000000,
+        "level": 40,
+        "profitSum": 749650,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_karting_club",
+        "icon": "",
+        "id": "karting_club40",
+        "profit": 120000,
+        "cost": 140000000,
+        "level": 40,
+        "profitSum": 649850,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_kicksharing",
+        "icon": "",
+        "id": "Kicksharing10",
+        "profit": 4850,
+        "cost": 28300000,
+        "level": 10,
+        "profitSum": 21060,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_language_school",
+        "icon": "",
+        "id": "language_school40",
+        "profit": 210000,
+        "cost": 300000000,
+        "level": 40,
+        "profitSum": 810000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_movie_company",
+        "icon": "",
+        "id": "movie_company24",
+        "profit": 3800,
+        "cost": 10000000,
+        "level": 24,
+        "profitSum": 40200,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_music_store",
+        "icon": "",
+        "id": "music_store20",
+        "profit": 9000,
+        "cost": 550000,
+        "level": 20,
+        "profitSum": 27500,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_pastry_shop",
+        "icon": "",
+        "id": "pastry_shop40",
+        "profit": 188000,
+        "cost": 140000000,
+        "level": 40,
+        "profitSum": 690000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_pharmaceutical_factory",
+        "icon": "",
+        "id": "pharmaceutical_factory29",
+        "profit": 10000,
+        "cost": 27000000,
+        "level": 29,
+        "profitSum": 104000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_processing_plant",
+        "icon": "",
+        "id": "ProcessingPlant18",
+        "profit": 30300,
+        "cost": 98000000,
+        "level": 18,
+        "profitSum": 131290,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_radiostation",
+        "icon": "",
+        "id": "RadioStation11",
+        "profit": 65400,
+        "cost": 57300000,
+        "level": 11,
+        "profitSum": 267560,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_robotics_factory",
+        "icon": "",
+        "id": "robotics_factory29",
+        "profit": 15500,
+        "cost": 28000000,
+        "level": 29,
+        "profitSum": 126000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_service_center",
+        "icon": "",
+        "id": "service_center20",
+        "profit": 9000,
+        "cost": 500000,
+        "level": 20,
+        "profitSum": 26010,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_shoe_store",
+        "icon": "",
+        "id": "shoe_store20",
+        "profit": 13000,
+        "cost": 900000,
+        "level": 20,
+        "profitSum": 37000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_soap_factory",
+        "icon": "",
+        "id": "SoapFactory13",
+        "profit": 13800,
+        "cost": 25900000,
+        "level": 13,
+        "profitSum": 59800,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_spacecraft_company",
+        "icon": "",
+        "id": "spacecraft_company24",
+        "profit": 6700,
+        "cost": 12000000,
+        "level": 24,
+        "profitSum": 52000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_vet_clinic",
+        "icon": "",
+        "id": "PetClinic19",
+        "profit": 71500,
+        "cost": 165000000,
+        "level": 19,
+        "profitSum": 307440,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_vr_studio",
+        "icon": "",
+        "id": "vr_studio40",
+        "profit": 250000,
+        "cost": 220000000,
+        "level": 40,
+        "profitSum": 970000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_web_design_studio",
+        "icon": "",
+        "id": "WebDesignStudio11",
+        "profit": 121000,
+        "cost": 179000000,
+        "level": 11,
+        "profitSum": 494450,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_wine_boutique",
+        "icon": "",
+        "id": "WineBoutique13",
+        "profit": 13000,
+        "cost": 23300000,
+        "level": 13,
+        "profitSum": 56300,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptoclicker_yoga_studio",
+        "icon": "",
+        "id": "yoga_studio20",
+        "profit": 6500,
+        "cost": 350000,
+        "level": 20,
+        "profitSum": 21700,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_airjet",
+        "icon": "",
+        "id": "AirJet20",
+        "profit": 25000,
+        "cost": 75000000,
+        "level": 20,
+        "profitSum": 121000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_anubisplinko",
+        "icon": "",
+        "id": "AnubisPlinko40",
+        "profit": 1910000,
+        "cost": 2960000000,
+        "level": 40,
+        "profitSum": 6056250,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_bombucks",
+        "icon": "",
+        "id": "Bombucks20",
+        "profit": 1300,
+        "cost": 110000,
+        "level": 20,
+        "profitSum": 5800,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_brawlpirates",
+        "icon": "",
+        "id": "BrawlPirates40",
+        "profit": 1380000,
+        "cost": 1670000000,
+        "level": 40,
+        "profitSum": 4368750,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_carpentry_workshop",
+        "icon": "",
+        "id": "carpentry_workshop20",
+        "profit": 6700,
+        "cost": 260000,
+        "level": 20,
+        "profitSum": 29200,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_catering_company",
+        "icon": "",
+        "id": "catering_company31",
+        "profit": 28200,
+        "cost": 59500000,
+        "level": 31,
+        "profitSum": 189300,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_coinflip",
+        "icon": "",
+        "id": "coinflip20",
+        "profit": 1150,
+        "cost": 45000,
+        "level": 20,
+        "profitSum": 4250,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_construction_company",
+        "icon": "",
+        "id": "construction_company_20",
+        "profit": 4400,
+        "cost": 170000,
+        "level": 20,
+        "profitSum": 18900,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_crypto_wallet",
+        "icon": "",
+        "id": "crypto_wallet20",
+        "profit": 90000,
+        "cost": 136365000,
+        "level": 20,
+        "profitSum": 308000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_double",
+        "icon": "",
+        "id": "Double20",
+        "profit": 2200,
+        "cost": 360000,
+        "level": 20,
+        "profitSum": 10300,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_football_club",
+        "icon": "",
+        "id": "football_club20",
+        "profit": 100043,
+        "cost": 297799000,
+        "level": 20,
+        "profitSum": 422760,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_fortunecrash",
+        "icon": "",
+        "id": "FortuneCrash17",
+        "profit": 20000,
+        "cost": 55500000,
+        "level": 17,
+        "profitSum": 92000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_gamedev_studio",
+        "icon": "",
+        "id": "gamedev_studio40",
+        "profit": 67000,
+        "cost": 97500000,
+        "level": 40,
+        "profitSum": 446000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_influencer",
+        "icon": "",
+        "id": "influencer_new_1",
+        "profit": 1000,
+        "cost": 0,
+        "level": 1,
+        "profitSum": 3000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_insurance_company",
+        "icon": "",
+        "id": "insurance_company21",
+        "profit": 3200,
+        "cost": 18250000,
+        "level": 21,
+        "profitSum": 29000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_jewelry_workshop",
+        "icon": "",
+        "id": "jewelry_workshop21",
+        "profit": 92300,
+        "cost": 152000000,
+        "level": 21,
+        "profitSum": 506300,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_luckyjet",
+        "icon": "",
+        "id": "LuckyJet20",
+        "profit": 24000,
+        "cost": 44500000,
+        "level": 20,
+        "profitSum": 109000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_luckyloot",
+        "icon": "",
+        "id": "LuckyLoot40",
+        "profit": 1020000,
+        "cost": 1130000000,
+        "level": 40,
+        "profitSum": 3247970,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_metacrash",
+        "icon": "",
+        "id": "MetaCrash15",
+        "profit": 27000,
+        "cost": 55000000,
+        "level": 15,
+        "profitSum": 118000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_mines",
+        "icon": "",
+        "id": "Mines20",
+        "profit": 1000,
+        "cost": 50000,
+        "level": 20,
+        "profitSum": 4400,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_model_agency",
+        "icon": "",
+        "id": "model_agency_29",
+        "profit": 165000,
+        "cost": 252000000,
+        "level": 29,
+        "profitSum": 750700,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_oil_factory",
+        "icon": "",
+        "id": "oil_factory23",
+        "profit": 5200,
+        "cost": 28500000,
+        "level": 23,
+        "profitSum": 46700,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_oil_well",
+        "icon": "",
+        "id": "oil_well37",
+        "profit": 59000,
+        "cost": 98500000,
+        "level": 37,
+        "profitSum": 354000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_pharmacy",
+        "icon": "",
+        "id": "pharmacy_20",
+        "profit": 1525,
+        "cost": 254543,
+        "level": 20,
+        "profitSum": 8125,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_printed_media",
+        "icon": "",
+        "id": "printed_media_20",
+        "profit": 3300,
+        "cost": 98000,
+        "level": 20,
+        "profitSum": 13500,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_real_agency",
+        "icon": "",
+        "id": "real_agency_20",
+        "profit": 4000,
+        "cost": 120000,
+        "level": 20,
+        "profitSum": 16900,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_renewable_energy",
+        "icon": "",
+        "id": "renewenergy12",
+        "profit": 40000,
+        "cost": 95000000,
+        "level": 12,
+        "profitSum": 180000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_research_lab",
+        "icon": "",
+        "id": "research_lab20",
+        "profit": 185000,
+        "cost": 446800000,
+        "level": 20,
+        "profitSum": 795000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_rocketqueen",
+        "icon": "",
+        "id": "RocketQueen22",
+        "profit": 28700,
+        "cost": 45000000,
+        "level": 22,
+        "profitSum": 129800,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_rocketx",
+        "icon": "",
+        "id": "RocketX37",
+        "profit": 953000,
+        "cost": 1430000000,
+        "level": 37,
+        "profitSum": 4155300,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_royalmines",
+        "icon": "",
+        "id": "RoyalMines40",
+        "profit": 822000,
+        "cost": 670000000,
+        "level": 40,
+        "profitSum": 2608520,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_semiconductor_manufacturing",
+        "icon": "",
+        "id": "semiconductor12",
+        "profit": 15000,
+        "cost": 38000000,
+        "level": 12,
+        "profitSum": 65000,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_speedncash",
+        "icon": "",
+        "id": "SpeednCash31",
+        "profit": 235000,
+        "cost": 332000000,
+        "level": 31,
+        "profitSum": 1113700,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_starx",
+        "icon": "",
+        "id": "StarX12",
+        "profit": 10000,
+        "cost": 25000000,
+        "level": 12,
+        "profitSum": 51500,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_tower",
+        "icon": "",
+        "id": "Tower20",
+        "profit": 1100,
+        "cost": 145000,
+        "level": 20,
+        "profitSum": 5900,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_travel_agency",
+        "icon": "",
+        "id": "travel_agency_40",
+        "profit": 125000,
+        "cost": 17300000,
+        "level": 40,
+        "profitSum": 499240,
+        "new_ref_count": 0
+    },
+    {
+        "name": "$cryptocliker_yacht_club",
+        "icon": "",
+        "id": "yacht_club26",
+        "profit": 4600,
+        "cost": 16500000,
+        "level": 26,
+        "profitSum": 41800,
+        "new_ref_count": 0
+    }
+]

@@ -1,0 +1,1240 @@
+{
+    "cityName": "Asmar911",
+    "population": 3185486,
+    "level": 34,
+    "incomePerHour": 48789591,
+    "balance": 1221302082,
+    "buildings": [
+        {
+            "id": 97794089,
+            "type": "Special",
+            "buildingName": "$cryptocliker_love_bridge",
+            "level": 20,
+            "updatedAt": 1740085598,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 17,
+                    "y": 25
+                },
+                "bottomLeft": {
+                    "x": 15,
+                    "y": 23
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 140640618,
+            "type": "Special",
+            "buildingName": "$cryptocliker_shuttle_launch_pad",
+            "level": 9,
+            "updatedAt": 1755663368,
+            "finishedAt": 1755674168,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 10,
+                    "y": 7
+                },
+                "bottomLeft": {
+                    "x": 8,
+                    "y": 5
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 140640676,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_hospital",
+            "level": 8,
+            "updatedAt": 1755950313,
+            "finishedAt": 1755959313,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 22,
+                    "y": 7
+                },
+                "bottomLeft": {
+                    "x": 20,
+                    "y": 5
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 140640711,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_office_center",
+            "level": 9,
+            "updatedAt": 1755950317,
+            "finishedAt": 1755961117,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 10
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 8
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 140640646,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_bus_station",
+            "level": 9,
+            "updatedAt": 1755950313,
+            "finishedAt": 1755961113,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 21,
+                    "y": 11
+                },
+                "bottomLeft": {
+                    "x": 19,
+                    "y": 9
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 128652678,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_city_parking",
+            "level": 10,
+            "updatedAt": 1755950314,
+            "finishedAt": 1755964714,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 18,
+                    "y": 11
+                },
+                "bottomLeft": {
+                    "x": 16,
+                    "y": 9
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 140640759,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_electronics_factory",
+            "level": 12,
+            "updatedAt": 1755950323,
+            "finishedAt": 1755993523,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 9,
+                    "y": 11
+                },
+                "bottomLeft": {
+                    "x": 7,
+                    "y": 9
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 140640740,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_swimming_pool",
+            "level": 10,
+            "updatedAt": 1755950317,
+            "finishedAt": 1755962917,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 21,
+                    "y": 14
+                },
+                "bottomLeft": {
+                    "x": 19,
+                    "y": 12
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 128652603,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_hotel_complex",
+            "level": 10,
+            "updatedAt": 1755950310,
+            "finishedAt": 1755962910,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 7,
+                    "y": 7
+                },
+                "bottomLeft": {
+                    "x": 5,
+                    "y": 5
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 91119876,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_alpine_house",
+            "level": 20,
+            "updatedAt": 1755950311,
+            "finishedAt": 1756036711,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 13,
+                    "y": 7
+                },
+                "bottomLeft": {
+                    "x": 11,
+                    "y": 5
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 125846276,
+            "type": "Special",
+            "buildingName": "$cryptocliker_museum_east",
+            "level": 9,
+            "updatedAt": 1750372337,
+            "finishedAt": 1750383137,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 15,
+                    "y": 11
+                },
+                "bottomLeft": {
+                    "x": 13,
+                    "y": 9
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 86261458,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_villa",
+            "level": 20,
+            "updatedAt": 1755838677,
+            "finishedAt": 1755925077,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 12,
+                    "y": 11
+                },
+                "bottomLeft": {
+                    "x": 10,
+                    "y": 9
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 106206396,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_mansion",
+            "level": 18,
+            "updatedAt": 1755950311,
+            "finishedAt": 1756015111,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 16,
+                    "y": 4
+                },
+                "bottomLeft": {
+                    "x": 14,
+                    "y": 2
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 117212577,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_diagnostic_center",
+            "level": 14,
+            "updatedAt": 1755950314,
+            "finishedAt": 1756007914,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 16,
+                    "y": 7
+                },
+                "bottomLeft": {
+                    "x": 14,
+                    "y": 5
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 106206280,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_fire_station",
+            "level": 15,
+            "updatedAt": 1755950315,
+            "finishedAt": 1756022315,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 19,
+                    "y": 7
+                },
+                "bottomLeft": {
+                    "x": 17,
+                    "y": 5
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 100519933,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_concert_hall",
+            "level": 16,
+            "updatedAt": 1755950315,
+            "finishedAt": 1756036715,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 7
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 5
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 91119921,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_library",
+            "level": 18,
+            "updatedAt": 1755950315,
+            "finishedAt": 1756079915,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 13
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 11
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 80756759,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_kindergarten",
+            "level": 20,
+            "updatedAt": 1755950315,
+            "finishedAt": 1756123115,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 16
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 14
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 120744072,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_spa_center",
+            "level": 12,
+            "updatedAt": 1755950317,
+            "finishedAt": 1755968317,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 3,
+                    "y": 15
+                },
+                "bottomLeft": {
+                    "x": 1,
+                    "y": 13
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 100520309,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_foodcourt",
+            "level": 17,
+            "updatedAt": 1755950321,
+            "finishedAt": 1756022321,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 18,
+                    "y": 14
+                },
+                "bottomLeft": {
+                    "x": 16,
+                    "y": 12
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 86261492,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_flea_market",
+            "level": 20,
+            "updatedAt": 1755950322,
+            "finishedAt": 1756079922,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 15,
+                    "y": 14
+                },
+                "bottomLeft": {
+                    "x": 13,
+                    "y": 12
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 111605298,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_restaurant",
+            "level": 16,
+            "updatedAt": 1755950320,
+            "finishedAt": 1756007920,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 9,
+                    "y": 14
+                },
+                "bottomLeft": {
+                    "x": 7,
+                    "y": 12
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 74173154,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_guest_cottage",
+            "level": 20,
+            "updatedAt": 1742613679,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 3,
+                    "y": 3
+                },
+                "bottomLeft": {
+                    "x": 1,
+                    "y": 1
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 120744911,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_fish_farm",
+            "level": 15,
+            "updatedAt": 1755950324,
+            "finishedAt": 1756065524,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 3,
+                    "y": 9
+                },
+                "bottomLeft": {
+                    "x": 1,
+                    "y": 7
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 80756706,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_agricultural_complex",
+            "level": 19,
+            "updatedAt": 1755950325,
+            "finishedAt": 1756180725,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 6,
+                    "y": 11
+                },
+                "bottomLeft": {
+                    "x": 4,
+                    "y": 9
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 161442570,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_fashion_boutique",
+            "level": 8,
+            "updatedAt": 1755950316,
+            "finishedAt": 1755959316,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 10,
+                    "y": 4
+                },
+                "bottomLeft": {
+                    "x": 8,
+                    "y": 2
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 161442545,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_museum",
+            "level": 7,
+            "updatedAt": 1755950312,
+            "finishedAt": 1755957512,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 13,
+                    "y": 4
+                },
+                "bottomLeft": {
+                    "x": 11,
+                    "y": 2
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 168568193,
+            "type": "Special",
+            "buildingName": "$cryptocliker_building_1year_1winToken",
+            "level": 6,
+            "updatedAt": 1755950325,
+            "finishedAt": 1755955725,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 19
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 17
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 11640450,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_suburban_house",
+            "level": 20,
+            "updatedAt": 1732862215,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 18,
+                    "y": 21
+                },
+                "bottomLeft": {
+                    "x": 16,
+                    "y": 19
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 114539591,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_apartment_bulding",
+            "level": 16,
+            "updatedAt": 1755950310,
+            "finishedAt": 1756000710,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 3,
+                    "y": 6
+                },
+                "bottomLeft": {
+                    "x": 1,
+                    "y": 4
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 111605409,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_water_tower",
+            "level": 14,
+            "updatedAt": 1755838683,
+            "finishedAt": 1755925083,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 3,
+                    "y": 12
+                },
+                "bottomLeft": {
+                    "x": 1,
+                    "y": 10
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 74173248,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_bakery",
+            "level": 19,
+            "updatedAt": 1755950322,
+            "finishedAt": 1756058322,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 22,
+                    "y": 4
+                },
+                "bottomLeft": {
+                    "x": 20,
+                    "y": 2
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 157834139,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_resort",
+            "level": 4,
+            "updatedAt": 1755623997,
+            "finishedAt": 1755625797,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 7,
+                    "y": 4
+                },
+                "bottomLeft": {
+                    "x": 5,
+                    "y": 2
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 163422387,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_luxury_hotel",
+            "level": 6,
+            "updatedAt": 1755950309,
+            "finishedAt": 1755955709,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 4
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 2
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 41794319,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_motel",
+            "level": 20,
+            "updatedAt": 1734926167,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 12,
+                    "y": 14
+                },
+                "bottomLeft": {
+                    "x": 10,
+                    "y": 12
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 9960158,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_construction_factory",
+            "level": 20,
+            "updatedAt": 1737722364,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 22
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 20
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 60093379,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_manor",
+            "level": 20,
+            "updatedAt": 1742182030,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 19,
+                    "y": 4
+                },
+                "bottomLeft": {
+                    "x": 17,
+                    "y": 2
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 11636548,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_sawmill",
+            "level": 20,
+            "updatedAt": 1732862227,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 21,
+                    "y": 21
+                },
+                "bottomLeft": {
+                    "x": 19,
+                    "y": 19
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 14445290,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_eco_house",
+            "level": 20,
+            "updatedAt": 1733055733,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 6,
+                    "y": 14
+                },
+                "bottomLeft": {
+                    "x": 4,
+                    "y": 12
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 9957448,
+            "type": "Special",
+            "buildingName": "$cryptocliker_1win_holding",
+            "level": 1,
+            "updatedAt": 1732042571,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 15,
+                    "y": 18
+                },
+                "bottomLeft": {
+                    "x": 13,
+                    "y": 16
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 9957069,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_orangery",
+            "level": 20,
+            "updatedAt": 1732862223,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 25,
+                    "y": 25
+                },
+                "bottomLeft": {
+                    "x": 23,
+                    "y": 23
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 69671618,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_power_plant",
+            "level": 17,
+            "updatedAt": 1755838684,
+            "finishedAt": 1756011484,
+            "state": "upgrade",
+            "position": {
+                "topRight": {
+                    "x": 21,
+                    "y": 18
+                },
+                "bottomLeft": {
+                    "x": 19,
+                    "y": 16
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 18338262,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_townhouse",
+            "level": 20,
+            "updatedAt": 1742302956,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 18,
+                    "y": 18
+                },
+                "bottomLeft": {
+                    "x": 16,
+                    "y": 16
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 83067437,
+            "type": "Special",
+            "buildingName": "$cryptocliker_friendship_tree",
+            "level": 1,
+            "updatedAt": 1737318015,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 21,
+                    "y": 25
+                },
+                "bottomLeft": {
+                    "x": 19,
+                    "y": 23
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 9958318,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_terraced_house",
+            "level": 20,
+            "updatedAt": 1732862217,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 15,
+                    "y": 21
+                },
+                "bottomLeft": {
+                    "x": 13,
+                    "y": 19
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 60093290,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_beauty_salon",
+            "level": 20,
+            "updatedAt": 1742302993,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 3,
+                    "y": 21
+                },
+                "bottomLeft": {
+                    "x": 1,
+                    "y": 19
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 9954482,
+            "type": "Residential",
+            "buildingName": "$cryptocliker_wood_house",
+            "level": 20,
+            "updatedAt": 1732769190,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 12,
+                    "y": 21
+                },
+                "bottomLeft": {
+                    "x": 10,
+                    "y": 19
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 60093185,
+            "type": "Special",
+            "buildingName": "$cryptocliker_santa_factory",
+            "level": 20,
+            "updatedAt": 1736029601,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 12,
+                    "y": 18
+                },
+                "bottomLeft": {
+                    "x": 10,
+                    "y": 16
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 69671642,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_police_station",
+            "level": 20,
+            "updatedAt": 1742665817,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 9,
+                    "y": 18
+                },
+                "bottomLeft": {
+                    "x": 7,
+                    "y": 16
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 11653513,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_cemetery",
+            "level": 20,
+            "updatedAt": 1737722368,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 9,
+                    "y": 21
+                },
+                "bottomLeft": {
+                    "x": 7,
+                    "y": 19
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 11653330,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_dancing_fountain",
+            "level": 20,
+            "updatedAt": 1738308004,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 6,
+                    "y": 18
+                },
+                "bottomLeft": {
+                    "x": 4,
+                    "y": 16
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 11649751,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_monument",
+            "level": 20,
+            "updatedAt": 1732862232,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 3,
+                    "y": 18
+                },
+                "bottomLeft": {
+                    "x": 1,
+                    "y": 16
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 9958709,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_city_hall",
+            "level": 20,
+            "updatedAt": 1732862229,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 6,
+                    "y": 21
+                },
+                "bottomLeft": {
+                    "x": 4,
+                    "y": 19
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 48195631,
+            "type": "Industrial",
+            "buildingName": "$cryptocliker_farm",
+            "level": 20,
+            "updatedAt": 1738865920,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 41794262,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_market",
+            "level": 20,
+            "updatedAt": 1737357786,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 21417967,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_bookstore",
+            "level": 20,
+            "updatedAt": 1737722358,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        },
+        {
+            "id": 9955158,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_supermarket",
+            "level": 20,
+            "updatedAt": 1732769182,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 9955382,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_car_tuning",
+            "level": 20,
+            "updatedAt": 1732769185,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 11640194,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_city_square",
+            "level": 20,
+            "updatedAt": 1732862234,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 54995575,
+            "type": "Special",
+            "buildingName": "$cryptocliker_santa_home",
+            "level": 20,
+            "updatedAt": 1735856538,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 9954981,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_street_food",
+            "level": 20,
+            "updatedAt": 1732769173,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 11635604,
+            "type": "Commercial",
+            "buildingName": "$cryptocliker_cafe",
+            "level": 20,
+            "updatedAt": 1732862209,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 1
+        },
+        {
+            "id": 48195658,
+            "type": "Municipal",
+            "buildingName": "$cryptocliker_botanical_garden",
+            "level": 20,
+            "updatedAt": 1742182022,
+            "state": "ready",
+            "position": {
+                "topRight": {
+                    "x": 0,
+                    "y": 0
+                },
+                "bottomLeft": {
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "referralsSinceLastUpdate": 0
+        }
+    ],
+    "isCompletedCityMainOnboarding": true,
+    "createdAt": 1732042503
+}

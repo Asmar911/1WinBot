@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g. 1.2.3)'
+        required: true
+
+jobs:
+  make-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine version
+        id: ver
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            # Strip leading 'v' from tag name like v1.2.3
+            VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Update project version in pyproject.toml
+        if: ${{ hashFiles('pyproject.toml') != '' }}
+        shell: bash
+        run: |
+          ver='${{ steps.ver.outputs.version }}'
+          # Update version = "..." in pyproject.toml in-place
+          if grep -qE '^version\s*=\s*"' pyproject.toml; then
+            perl -0777 -pe "s/^version\s*=\s*\".*?\"/version = \"$ver\"/m" -i pyproject.toml
+          fi
+
+      - name: Create zip archive
+        shell: bash
+        run: |
+          ver='${{ steps.ver.outputs.version }}'
+          zip_name="1winbot-$ver.zip"
+          # Exclude VCS, venvs, caches
+          zip -r "$zip_name" . \
+            -x ".git/*" \
+               "venv/*" \
+               ".venv/*" \
+               "**/__pycache__/*"
+          echo "zip_name=$zip_name" >> "$GITHUB_OUTPUT"
+        id: zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name || format('v{0}', steps.ver.outputs.version) }}
+          name: v${{ steps.ver.outputs.version }}
+          files: ${{ steps.zip.outputs.zip_name }}
+          generate_release_notes: true
+

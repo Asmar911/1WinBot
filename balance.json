@@ -1,0 +1,10 @@
+{
+    "coinsBalance": 1225905492,
+    "miningPerHour": 48797497,
+    "coinsPerClick": 4878,
+    "currentEnergy": 734,
+    "energyLimit": 6500,
+    "energyRegen": 3.39,
+    "energyPerTap": 5,
+    "web2tokenBalance": 217
+}

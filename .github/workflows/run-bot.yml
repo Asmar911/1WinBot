@@ -1,0 +1,150 @@
+name: Run Bot (-a 2)
+
+on:
+  schedule:
+    # Near-continuous: start every 6 hours; each run lasts ~5h45m
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      duration_minutes_min:
+        description: 'Minimum run duration in minutes'
+        required: false
+        default: '340'
+      duration_minutes_max:
+        description: 'Maximum run duration in minutes'
+        required: false
+        default: '355'
+
+concurrency:
+  # Ensure only one run of this workflow at a time across branches
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    # GitHub-hosted jobs have a hard 6h limit; set close to max
+    timeout-minutes: 360
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Prepare .env
+        shell: bash
+        run: |
+          : "Create .env strictly from repository secrets (public-safe)"
+          if [ -f .env ]; then
+            echo "WARNING: .env file exists in repo checkout. Public repos must not commit .env. Ignoring committed file."
+            rm -f .env
+          fi
+          if [ -z "${{ secrets.API_ID }}" ] || [ -z "${{ secrets.API_HASH }}" ]; then
+            echo 'ERROR: Missing secrets API_ID and/or API_HASH' >&2
+            exit 1
+          fi
+          {
+            echo "API_ID=${{ secrets.API_ID }}"
+            echo "API_HASH=${{ secrets.API_HASH }}"
+            if [ -n "${{ secrets.USE_PROXY_FROM_FILE }}" ]; then
+              echo "USE_PROXY_FROM_FILE=${{ secrets.USE_PROXY_FROM_FILE }}"
+            fi
+          } > .env
+          echo ".env created from secrets"
+
+      - name: Restore proxies.txt (optional)
+        shell: bash
+        run: |
+          if [ -n "${{ secrets.PROXIES_TXT }}" ]; then
+            mkdir -p bot/config
+            printf '%s' "${{ secrets.PROXIES_TXT }}" > bot/config/proxies.txt
+            echo "proxies.txt restored"
+          else
+            echo "No PROXIES_TXT secret set; skipping"
+          fi
+
+      - name: Restore sessions directory from base64 tar (optional)
+        shell: bash
+        run: |
+          if [ -n "${{ secrets.SESSIONS_TGZ_B64 }}" ]; then
+            mkdir -p sessions
+            echo "Restoring sessions from SESSIONS_TGZ_B64 secret"
+            printf '%s' "${{ secrets.SESSIONS_TGZ_B64 }}" | base64 -d > sessions.tgz
+            tar -xzf sessions.tgz
+            ls -la sessions || true
+          else
+            echo "No SESSIONS_TGZ_B64 secret set; skipping"
+          fi
+
+      - name: Check for session files
+        id: sessions
+        shell: bash
+        run: |
+          shopt -s nullglob
+          files=(sessions/*.session)
+          if [ ${#files[@]} -gt 0 ]; then
+            echo "Found ${#files[@]} session file(s)"
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No session files found in ./sessions"
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Compute random duration
+        id: dur
+        shell: bash
+        run: |
+          # Defaults aim for ~5h45m to avoid hitting the hard 6h job cap
+          min_m=${{ inputs.duration_minutes_min || 340 }}
+          max_m=${{ inputs.duration_minutes_max || 355 }}
+          if [ "$max_m" -lt "$min_m" ]; then
+            echo "Swapping min/max durations"; tmp=$min_m; min_m=$max_m; max_m=$tmp
+          fi
+          range=$(( max_m - min_m ))
+          # RANDOM returns 0..32767; add 0..range, inclusive
+          add=$(( range > 0 ? (RANDOM % (range + 1)) : 0 ))
+          minutes=$(( min_m + add ))
+          seconds=$(( minutes * 60 ))
+          echo "minutes=$minutes" >> "$GITHUB_OUTPUT"
+          echo "seconds=$seconds" >> "$GITHUB_OUTPUT"
+
+      - name: Run bot (-a 2) with timeout and capture logs
+        if: ${{ steps.sessions.outputs.present == 'true' }}
+        shell: bash
+        run: |
+          echo "Planned run duration: ${{ steps.dur.outputs.minutes }} minute(s)"
+          set -o pipefail
+          # Send SIGINT so Python exits gracefully (main suppresses KeyboardInterrupt)
+          # Kill with SIGKILL after a grace period if it ignores SIGINT
+          timeout --signal=SIGINT --kill-after=15s "${{ steps.dur.outputs.seconds }}s" \
+            bash -lc "python main.py -a 2" 2>&1 | tee run.log
+          code=${PIPESTATUS[0]}
+          if [ "$code" = "124" ]; then
+            echo "Timed out as planned; treating as successful stop."
+            exit 0
+          fi
+          echo "Exit code: $code"
+          exit $code
+
+      - name: Upload run log artifact
+        if: ${{ always() && steps.sessions.outputs.present == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-log
+          path: run.log
+          retention-days: 7
+
+      - name: No sessions found (skipped run)
+        if: ${{ steps.sessions.outputs.present != 'true' }}
+        shell: bash
+        run: |
+          echo "Run skipped: no sessions found."
+          echo "To enable runs, create sessions locally (action 1) and set SESSIONS_TGZ_B64 secret. See RUN_IN_ACTIONS.md."

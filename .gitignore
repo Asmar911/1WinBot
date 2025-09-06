@@ -1,0 +1,23 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Environment and sessions (never commit secrets)
+.env
+sessions/
+
+# Archives and logs (do not commit sensitive outputs)
+sessions*.tar.gz
+sessions*.tgz
+sessions*.zip
+*.b64
+sessions*.tar
+run.log
+*.tar
+.tar
+# Virtual environments
+.venv
