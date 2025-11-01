@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     APPLY_DAILY_TURBO: bool = True
 
     RANDOM_TAPS_COUNT: list[int] = [50, 200]
-    SLEEP_BETWEEN_TAP: list[int] = [10, 25]
+    SLEEP_BETWEEN_TAP: list[int] = [5, 10]
 
     USE_PROXY_FROM_FILE: bool = False
 

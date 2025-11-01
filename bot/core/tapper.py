@@ -93,7 +93,7 @@ class Tapper:
     async def login(self, http_client: aiohttp.ClientSession, tg_web_data: dict[str, str | int]) -> dict:
         try:
             response = await http_client.post(
-                url=f"https://clicker-backend.tma.top/game/start?query_id={tg_web_data['query_id']}&user={tg_web_data['user']}"
+                url=f"https://clicker-backend.tma.top/v3/game/start?query_id={tg_web_data['query_id']}&user={tg_web_data['user']}"
                 f"&auth_date={tg_web_data['auth_date']}&signature={tg_web_data['signature']}&hash={tg_web_data['hash']}",
             )
             response.raise_for_status()
@@ -215,7 +215,7 @@ class Tapper:
 
     async def get_energy_boost_info(self, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.get(url='https://clicker-backend.tma.top/energy/bonus')
+            response = await http_client.get(url='https://clicker-backend.tma.top/v2/energy/bonus')
             response.raise_for_status()
 
             return await response.json()
@@ -249,7 +249,7 @@ class Tapper:
 
     async def apply_energy_boost(self, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.post(url='https://clicker-backend.tma.top/energy/bonus')
+            response = await http_client.post(url='https://clicker-backend.tma.top/v2/energy/bonus')
             response.raise_for_status()
 
             return await response.json()
@@ -290,7 +290,8 @@ class Tapper:
                     if time() - access_token_created_time >= 3600:
                         tg_web_data = await self.get_tg_web_data(proxy=proxy)
                         login_data = await self.login(http_client=http_client, tg_web_data=tg_web_data)
-                        access_token = login_data.get('token')
+                        access_token = login_data.get('result', {}).get('token')
+                        # print (access_token)
 
                         http_client.headers["Authorization"] = f"Bearer {access_token}"
                         headers["Authorization"] = f"Bearer {access_token}"
@@ -300,13 +301,13 @@ class Tapper:
                         balance_data = await self.balance(http_client=http_client)
 
                         balance = balance_data['coinsBalance']
-                        curr_energy = login_data['currentEnergy']
-                        limit_energy = login_data['energyLimit']
+                        curr_energy = login_data['result']['currentEnergy']
+                        limit_energy = login_data['result']['energyLimit']
 
                         logger.success(
-                            f"{self.session_name} | Login! | Balance: {balance:,} | Passive Earn: {login_data['totalPassiveProfit']:,}  | Energy: {curr_energy:,}/{limit_energy:,}")
+                            f"{self.session_name} | Login! | Balance: {balance:,} | Passive Earn: {login_data['result']['totalPassiveProfit']:,}  | Energy: {curr_energy:,}/{limit_energy:,}")
 
-                        if login_data.get('isCompletedNavigationOnboarding') is False:
+                        if login_data['result']['isCompletedNavigationOnboarding'] is False:
                             await self.complete_onboarding(http_client=http_client)
                     
 
@@ -337,8 +338,8 @@ class Tapper:
 
                     boosts_info = await self.get_energy_boost_info(http_client=http_client)
 
-                    energy_boost_count = boosts_info['remaining']
-                    second_to_next_use_energy = boosts_info['seconds_to_next_use']
+                    energy_boost_count = boosts_info['result']['remaining']
+                    second_to_next_use_energy = boosts_info['result']['seconds_to_next_use']
 
                     if (energy_boost_count > 0 and second_to_next_use_energy == 0
                             and available_energy < settings.MIN_AVAILABLE_ENERGY
