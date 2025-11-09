@@ -1,5 +1,7 @@
 import asyncio
+from collections import OrderedDict
 from time import time
+from datetime import timedelta
 from random import randint
 from urllib.parse import unquote
 
@@ -16,10 +18,21 @@ from bot.exceptions import InvalidSession
 from .headers import headers
 
 
+IGNORED_LEVEL_FIELDS = {"name", "description", "gradientsType"}
+
+
 class Tapper:
     def __init__(self, tg_client: Client):
         self.session_name = f"{tg_client.name:<10}"
         self.tg_client = tg_client
+        self.coin_balance = 0
+        self.energyLimit = 0
+        self.energyRegen = 0
+        self.business_Config: list[dict] = []
+        self.business_Info: list[dict] = []
+        self.business_upgradable_cards: list[dict] = []
+        self.blacklist_cards: set[str] = {"$cryptocliker_influencer"}
+
 
     async def get_tg_web_data(self, proxy: str | None) -> str:
         if proxy:
@@ -124,94 +137,263 @@ class Tapper:
             logger.error(f"{self.session_name} | Unknown error when get balance: {error}")
             await asyncio.sleep(delay=3)
 
-    # async def daily_reword(self, http_client: aiohttp.ClientSession) -> dict | None:
-    #     try:
-    #         response = await http_client.get(url="https://clicker-backend.tma.top/v2/tasks/everydayreward")
-    #         response.raise_for_status()
-    #         is_collected = response.get('days')[0].get('isCollected')
-    #         reward = response.get('days')[0].get('money')
-    #         day = response.get('days')[0].get('id')
-    #         if is_collected == False:
-    #             post_response = await self.session.post('https://crypto-clicker-backend-go-prod.100hp.app/tasks/everydayreward',proxy = self.proxy)
-                
-    #             authorization = self.session.headers['authorization']
-    #             del self.session.headers['authorization']
-    #             self.session.headers['access-control-request-headers'] = 'authorization'
-    #             self.session.headers['access-control-request-method'] = 'POST'
-                
-    #             await self.session.options('https://crypto-clicker-backend-go-prod.100hp.app/tasks/everydayreward',proxy = self.proxy)
-                
-    #             del self.session.headers['access-control-request-headers']
-    #             del self.session.headers['access-control-request-method']
-    #             self.session.headers['authorization'] = authorization
+    async def daily_reword(self, http_client: aiohttp.ClientSession) -> dict | None:
+        try:
+            response = await http_client.get(url="https://clicker-backend.tma.top/v2/tasks/everydayreward")
+            response.raise_for_status()
             
-    #             logger.success(f"| Thread {self.thread} | {self.name} | claim {day} reward : {reward}")
 
-    #         # return await response.json()
+            return await response.json()
+        except Exception as error:
+            logger.error(f"{self.session_name} | Unknown error when getting daily reward: {error}")
+            await asyncio.sleep(delay=3)
+
+    async def Claim_daily_reword(self, http_client: aiohttp.ClientSession) -> dict | None:
+        try:
+            logger.info(f"{self.session_name} | Sleep 5s before claim Daily reword")
+            await asyncio.sleep(delay=5)
+
+            days = await self.daily_reword(http_client=http_client)
+            for day in days:
+                if day['isCurrent'] and day['status'] == "new":
+
+                    response = await http_client.post(url="https://clicker-backend.tma.top/v2/tasks/everydayreward")
+                    response.raise_for_status()
+                    logger.success(f"{self.session_name} | Successfully Claimed Daily Reword {day['day']} {day['money']:,}")
+                else:
+                    logger.info(f"{self.session_name} | Daily Reword already claimed | Next in: {str(timedelta(seconds=day['secondLeft']))}")
+                    break
+            
+
+            # return await response.json()
+        except Exception as error:
+            logger.error(f"{self.session_name} | Unknown error when getting daily reward: {error}")
+            await asyncio.sleep(delay=3)
+
+
+
+    # async def Game_Config(self, http_client: aiohttp.ClientSession):
+    #     try:
+    #         response = await http_client.get(url='https://clicker-backend.tma.top/game/config?lang=en')
+    #         response.raise_for_status()
+
+    #         return await response.json()
     #     except Exception as error:
-    #         logger.error(f"{self.session_name} | Unknown error when getting daily reward: {error}")
+    #         logger.error(f"{self.session_name} | Unknown error while getting Game Config: {error}")
     #         await asyncio.sleep(delay=3)
-    #
+
+
+    def update_business_upgradable_cards(self) -> None:
+        """Build in-memory lists for business levels and upgrade targets."""
+        if not self.business_Config or not self.business_Info:
+            self.business_upgradable_cards = []
+            return
+
+        grouped_levels: "OrderedDict[str, dict]" = OrderedDict()
+        for entry in self.business_Config:
+            name = entry.get("name")
+            if not name:
+                continue
+
+            bucket = grouped_levels.setdefault(
+                name,
+                {
+                    "description": entry.get("description", ""),
+                    "gradientsType": entry.get("gradientsType", ""),
+                    "Levels": [],
+                },
+            )
+
+            if not bucket.get("description") and entry.get("description"):
+                bucket["description"] = entry["description"]
+            if not bucket.get("gradientsType") and entry.get("gradientsType"):
+                bucket["gradientsType"] = entry["gradientsType"]
+
+            bucket["Levels"].append(
+                {key: value for key, value in entry.items() if key not in IGNORED_LEVEL_FIELDS}
+            )
+
+        aggregated_by_name: dict[str, dict] = {}
+        for name, payload in grouped_levels.items():
+            payload["Levels"].sort(key=lambda lvl: lvl.get("level", 0))
+            aggregated_by_name[name] = {
+                "Levels": payload["Levels"],
+                "Total Levels": len(payload["Levels"]),
+            }
+
+        upgradable: list[dict] = []
+        for info in self.business_Info:
+            name = info.get("name")
+            current_level = info.get("level")
+            if not name or current_level is None or name in self.blacklist_cards:
+                continue
+
+            aggregated = aggregated_by_name.get(name)
+            if not aggregated:
+                continue
+
+            total_levels = aggregated["Total Levels"]
+            if current_level >= total_levels:
+                continue
+
+            next_level = next(
+                (lvl for lvl in aggregated["Levels"] if lvl.get("level", 0) > current_level),
+                None,
+            )
+            if not next_level:
+                continue
+
+            cost = next_level.get("cost")
+            profit = next_level.get("profit")
+            if isinstance(cost, (int, float)) and cost:
+                roi = (profit * 100 / cost) if isinstance(profit, (int, float)) else None
+            else:
+                roi = None
+
+            upgradable.append(
+                {
+                    "name": name,
+                    "id": next_level.get("id"),
+                    "level": next_level.get("level"),
+                    "cost": cost,
+                    "profit": profit,
+                    "roi": roi,
+                }
+            )
+
+        upgradable.sort(key=lambda card: (card["roi"] is None, -(card["roi"] or 0)))
+        self.business_upgradable_cards = [
+            card for card in upgradable if card["name"] not in self.blacklist_cards
+        ]
+
+
+
+    # async def city_Config(self, http_client: aiohttp.ClientSession):
+    #     try:
+    #         response = await http_client.get(url='https://clicker-backend.tma.top/city/config')
+    #         response.raise_for_status()
+
+    #         return await response.json()
+    #     except Exception as error:
+    #         logger.error(f"{self.session_name} | Unknown error while getting City Config: {error}")
+    #         await asyncio.sleep(delay=3)
+
+    # async def City_Info(self, http_client: aiohttp.ClientSession):
+    #     try:
+    #         response = await http_client.get(url='https://clicker-backend.tma.top/v2/city/launch')
+    #         response.raise_for_status()
+
+    #         return await response.json()
+    #     except Exception as error:
+    #         logger.error(f"{self.session_name} | Unknown error while getting City Info: {error}")
+    #         await asyncio.sleep(delay=3)
 
     async def Game_Config(self, http_client: aiohttp.ClientSession):
         try:
             response = await http_client.get(url='https://clicker-backend.tma.top/game/config?lang=en')
             response.raise_for_status()
+            if response:
+                data = await response.json()
+                self.business_Config = data['PassiveProfit']
+                logger.success(f"{self.session_name} | Successfully Fetched PassiveProfit Info")
+            else:
+                logger.error(f"{self.session_name} | Unknown error while getting PassiveProfit")
 
-            return await response.json()
-        except Exception as error:
-            logger.error(f"{self.session_name} | Unknown error while getting Game Config: {error}")
-            await asyncio.sleep(delay=3)
-
-    async def city_Config(self, http_client: aiohttp.ClientSession):
-        try:
-            response = await http_client.get(url='https://clicker-backend.tma.top/city/config')
-            response.raise_for_status()
-
-            return await response.json()
+            # return await response.json()
         except Exception as error:
             logger.error(f"{self.session_name} | Unknown error while getting City Config: {error}")
             await asyncio.sleep(delay=3)
 
-    async def City_Info(self, http_client: aiohttp.ClientSession):
+    async def Business_Info(self, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.get(url='https://clicker-backend.tma.top/v2/city/launch')
+            response = await http_client.get(url='https://clicker-backend.tma.top/business')
             response.raise_for_status()
+            if response: 
+                body = await response.json()
+                self.business_Info = body["result"]["body"]
+                logger.success(f"{self.session_name} | Successfully Fetched Business Info")
+            else:
+                logger.error(f"{self.session_name} | Unknown error while getting Business Body Info")
 
-            return await response.json()
+            # return await response.json()
         except Exception as error:
-            logger.error(f"{self.session_name} | Unknown error while getting City Info: {error}")
+            logger.error(f"{self.session_name} | Unknown error while getting Business Info: {error}")
             await asyncio.sleep(delay=3)
 
-    async def Mining_Info(self, http_client: aiohttp.ClientSession):
+    async def Business_Upgrade(self,Card_Id, Card_level, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.get(url='https://clicker-backend.tma.top/minings')
+            response = await http_client.post(url='https://clicker-backend.tma.top/business', json={"id":Card_Id,"level":Card_level})
             response.raise_for_status()
+            logger.success(f"{self.session_name} | Successfully Upgraded Card {Card_Id} to lvl {Card_level}")
+            # return await response.json() ## response {"totalProfit": 36284550,"NextLevel": {"name": "$cryptocliker_oil_factory","icon": "Oil Factory-2","id": "oil_factory25","profit": 6500,"cost": 42500000,"level": 25}}
 
-            return await response.json()
-        except Exception as error:
-            logger.error(f"{self.session_name} | Unknown error while getting Mining Info: {error}")
-            await asyncio.sleep(delay=3)
-
-    async def Upgrade_Mining(self,Card_Id, http_client: aiohttp.ClientSession):
-        try:
-            response = await http_client.post(url='https://clicker-backend.tma.top/minings', json={"id":Card_Id})
-            response.raise_for_status()
-
-            return await response.json() ## response {"totalProfit": 36284550,"NextLevel": {"name": "$cryptocliker_oil_factory","icon": "Oil Factory-2","id": "oil_factory25","profit": 6500,"cost": 42500000,"level": 25}}
         except Exception as error:
             logger.error(f"{self.session_name} | Unknown error while getting Energy Boost Info: {error}")
             await asyncio.sleep(delay=3)
 
-    async def Upgrade_Mining(self, buildingId, buildingtype, http_client: aiohttp.ClientSession):
+    async def UPGRADE(self, http_client: aiohttp.ClientSession):
         try:
-            response = await http_client.post(url='https://clicker-backend.tma.top/city/building', json={"buildingId":buildingId, "type":buildingtype})
-            response.raise_for_status()
+            logger.info(f"{self.session_name} | Business upgrade phase started")
 
-            return await response.json() ## respose {"population":3706486,"incomePerHour":37096868}
+            while True:
+                await asyncio.sleep(delay=3)
+                await self.Game_Config(http_client=http_client)
+                await asyncio.sleep(delay=3)
+                await self.Business_Info(http_client=http_client)
+                await asyncio.sleep(delay=3)
+
+                self.update_business_upgradable_cards()
+                if not self.business_upgradable_cards:
+                    logger.info(f"{self.session_name} | No cards available for upgrade")
+                    break
+
+                balance_data = await self.balance(http_client=http_client)
+                if not balance_data:
+                    logger.warning(f"{self.session_name} | Unable to fetch balance before upgrading")
+                    break
+
+                self.coin_balance = balance_data.get("coinsBalance", self.coin_balance)
+
+                card = self.business_upgradable_cards[0]
+                card_id = card.get("id") or card.get("name")
+                if not card_id:
+                    logger.warning(f"{self.session_name} | Missing card id for {card.get('name')}, skipping")
+                    self.blacklist_cards.add(card.get("name", ""))
+                    continue
+
+                cost = card.get("cost")
+                if cost is None:
+                    logger.warning(f"{self.session_name} | Missing cost info for {card['name']}, skipping")
+                    self.blacklist_cards.add(card["name"])
+                    continue
+
+                if cost > self.coin_balance:
+                    logger.warning(f"{self.session_name} | Need more {(cost - self.coin_balance):,} before upgrading {card['name']} card")
+                    break
+
+                remaining_balance = self.coin_balance - cost
+                if remaining_balance < settings.MIN_Balance:
+                    logger.warning(f"{self.session_name} | Stopped upgrading | Minimum balance ({settings.MIN_Balance:,}) would be breached")
+                    break
+
+                logger.info(f"{self.session_name} | Upgrading {card['name']} to level {card['level']} (cost: {cost:,})")
+                await self.Business_Upgrade(Card_Id=card_id, Card_level=card['level'], http_client=http_client)
+                await asyncio.sleep(delay=3)
+                # Loop will refetch data before attempting the next upgrade
+
         except Exception as error:
-            logger.error(f"{self.session_name} | Unknown error while getting Energy Boost Info: {error}")
+            logger.error(f"{self.session_name} | Unknown error while upgrading businesses: {error}")
             await asyncio.sleep(delay=3)
+
+    # async def Upgrade_Mining(self, buildingId, buildingtype, http_client: aiohttp.ClientSession):
+    #     try:
+    #         response = await http_client.post(url='https://clicker-backend.tma.top/city/building', json={"buildingId":buildingId, "type":buildingtype})
+    #         response.raise_for_status()
+
+    #         return await response.json() ## respose {"population":3706486,"incomePerHour":37096868}
+    #     except Exception as error:
+    #         logger.error(f"{self.session_name} | Unknown error while getting Energy Boost Info: {error}")
+    #         await asyncio.sleep(delay=3)
 
     async def get_energy_boost_info(self, http_client: aiohttp.ClientSession):
         try:
@@ -268,6 +450,32 @@ class Tapper:
             logger.error(f"{self.session_name} | Unknown error when Tapping: {error}")
             await asyncio.sleep(delay=3)
 
+    async def Improve_Tap(self,old, http_client: aiohttp.ClientSession) -> None:
+        try:
+            response = await http_client.post(url='https://clicker-backend.tma.top/v3/energy/tap/improve')
+            response.raise_for_status()
+            data= await response.json()
+            taps= data['result']['nextImprovement']['currentLevel']
+            logger.success(f"{self.session_name} | Successfully Improved taps to {taps:,}(+{old:,}) Business Info")
+
+        except Exception as error:
+            logger.error(f"{self.session_name} | Unknown error when Improve Tapping: {error}")
+            await asyncio.sleep(delay=3)
+
+    async def improvement_info(self, http_client: aiohttp.ClientSession) -> None:
+        try:
+            response = await http_client.get(url='https://clicker-backend.tma.top/v3/energy/tap/improvement')
+            response.raise_for_status()
+            data= await response.json()
+            oldLvl= data['result']['currentLevel']
+            logger.info(f"{self.session_name} | Sleep For 5s before Upgrade taps")
+            await asyncio.sleep(delay=5)
+            await self.Improve_Tap(old=oldLvl, http_client=http_client)
+
+        except Exception as error:
+            logger.error(f"{self.session_name} | Unknown error when Improve Tapping: {error}")
+            await asyncio.sleep(delay=3)
+
     async def check_proxy(self, http_client: aiohttp.ClientSession, proxy: Proxy) -> None:
         try:
             response = await http_client.get(url='https://httpbin.org/ip', timeout=aiohttp.ClientTimeout(5))
@@ -309,6 +517,8 @@ class Tapper:
 
                         if login_data['result']['isCompletedNavigationOnboarding'] is False:
                             await self.complete_onboarding(http_client=http_client)
+
+                        await self.Claim_daily_reword(http_client=http_client)
                     
 
                     taps = randint(a=settings.RANDOM_TAPS_COUNT[0], b=settings.RANDOM_TAPS_COUNT[1])
@@ -328,13 +538,15 @@ class Tapper:
                     if not profile_data:
                         continue
 
+                    self.energyLimit = profile_data['energyLimit']
+                    self.energyRegen = profile_data['energyRegen']
                     new_balance = profile_data['coinsBalance']
+                    self.coin_balance = new_balance
                     available_energy = profile_data['currentEnergy']
                     calc_taps = new_balance - balance
-                    balance = new_balance
 
                     logger.success(f"{self.session_name} | Successful tapped! {taps:,} taps | "
-                                   f"Balance: <c>{balance:,}</c> (<g>+{calc_taps:,}</g>) | remaining taps: {available_energy:,}")
+                                   f"Balance: <c>{self.coin_balance:,}</c> (<g>+{calc_taps:,}</g>) | remaining taps: {available_energy:,}")
 
                     boosts_info = await self.get_energy_boost_info(http_client=http_client)
 
@@ -357,8 +569,15 @@ class Tapper:
 
                     if available_energy < settings.MIN_AVAILABLE_ENERGY:
                         logger.info(f"{self.session_name} | Minimum energy reached: {available_energy}")
-                        sleep_max = randint(a=settings.SLEEP_BY_MIN_ENERGY[0], b=settings.SLEEP_BY_MIN_ENERGY[1])
-                        logger.info(f"{self.session_name} | Sleep {sleep_max}s")
+
+                        await self.UPGRADE(http_client=http_client)
+                        await asyncio.sleep(delay=3)
+                        await self.improvement_info(http_client=http_client)
+                        
+                        # sleep_max = randint(a=settings.SLEEP_BY_MIN_ENERGY[0], b=settings.SLEEP_BY_MIN_ENERGY[1])
+                        sleep_limit = self.energyLimit / self.energyRegen
+                        sleep_max = randint(a=sleep_limit+60,b=sleep_limit+240)
+                        logger.info(f"{self.session_name} | Sleep Limit: {sleep_limit} | Sleep {sleep_max}s")
 
                         await asyncio.sleep(delay=sleep_max)
 
