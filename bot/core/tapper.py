@@ -131,6 +131,8 @@ class Tapper:
         try:
             response = await http_client.get(url="https://clicker-backend.tma.top/user/balance")
             response.raise_for_status()
+            balance_data = await response.json()
+            self.coin_balance = balance_data['coinsBalance']
 
             return await response.json()
         except Exception as error:
@@ -320,70 +322,99 @@ class Tapper:
             logger.error(f"{self.session_name} | Unknown error while getting Business Info: {error}")
             await asyncio.sleep(delay=3)
 
-    async def Business_Upgrade(self,Card_Id, Card_level, http_client: aiohttp.ClientSession):
+    async def Business_Upgrade(self,Card, http_client: aiohttp.ClientSession):
+        Card_Id = " ".join(w.capitalize() for w in Card['name'].lstrip("$").split("_")[-2:])
+        Card_Level = Card['level']
         try:
-            response = await http_client.post(url='https://clicker-backend.tma.top/business', json={"id":Card_Id,"level":Card_level})
+            
+            response = await http_client.post(url='https://clicker-backend.tma.top/business', json={"id":Card['name'],"level":Card_Level})
             response.raise_for_status()
-            logger.success(f"{self.session_name} | Successfully Upgraded Card {Card_Id} to lvl {Card_level}")
-            # return await response.json() ## response {"totalProfit": 36284550,"NextLevel": {"name": "$cryptocliker_oil_factory","icon": "Oil Factory-2","id": "oil_factory25","profit": 6500,"cost": 42500000,"level": 25}}
-
+            if response:
+                logger.success(f"{self.session_name} | Successfully Upgraded Card {Card_Id} to lvl {Card_Level} | Income: (<g>+{Card['profit']:,}</g>)")
+                return True
+            else:
+                return False
         except Exception as error:
             logger.error(f"{self.session_name} | Unknown error while getting Energy Boost Info: {error}")
             await asyncio.sleep(delay=3)
 
+  
+
     async def UPGRADE(self, http_client: aiohttp.ClientSession):
         try:
-            logger.info(f"{self.session_name} | Business upgrade phase started")
+            upgraded_cards = 0
+            max_upgrade = 50
 
-            while True:
-                await asyncio.sleep(delay=3)
-                await self.Game_Config(http_client=http_client)
-                await asyncio.sleep(delay=3)
-                await self.Business_Info(http_client=http_client)
-                await asyncio.sleep(delay=3)
+            await asyncio.sleep(3)
+            logger.info(f"{self.session_name} | Business Upgrade Phase Started")
 
+            # Refresh state up front
+            await self.Game_Config(http_client=http_client)
+            await asyncio.sleep(3)
+            await self.Business_Info(http_client=http_client)
+            await asyncio.sleep(3)
+
+            remaining_balance = self.coin_balance
+
+            while upgraded_cards < max_upgrade:
+                # Recompute upgradable cards (assumed already ROI-sorted DESC)
                 self.update_business_upgradable_cards()
-                if not self.business_upgradable_cards:
-                    logger.info(f"{self.session_name} | No cards available for upgrade")
+                cards = self.business_upgradable_cards
+
+                if not cards:
+                    logger.info(f"{self.session_name} | No upgradable cards left. Stopping.")
                     break
 
-                balance_data = await self.balance(http_client=http_client)
-                if not balance_data:
-                    logger.warning(f"{self.session_name} | Unable to fetch balance before upgrading")
+                picked = None
+                for card in cards:
+                    cost = card['cost']
+                    # Choose the first ROI-best card that is affordable and respects MIN_Balance
+                    if cost <= remaining_balance and (remaining_balance - cost) >= settings.MIN_Balance:
+                        picked = card
+                        break  # list is already ROI-sorted; first viable is best by ROI
+
+                if not picked:
+                    # None of the ROI-sorted cards are currently viable
+                    top = cards[0]  # highest ROI card
+                    need_more = max(0, top.get("cost", 0) - remaining_balance)
+                    logger.warning(
+                        f"{self.session_name} | Cannot upgrade any ROI-ranked card now. "
+                        f"Top ROI '{top['name']}' (roi={top['roi']:.5f}) "
+                        f"needs {need_more:,} more."
+                    )
                     break
 
-                self.coin_balance = balance_data.get("coinsBalance", self.coin_balance)
+                # Proceed with upgrade (ROI-first, but still spend-aware)
+                cost = picked["cost"]
+                roi = picked['roi']
+                name = " ".join(w.capitalize() for w in picked['name'].lstrip("$").split("_")[-2:])
 
-                card = self.business_upgradable_cards[0]
-                card_id = card.get("id") or card.get("name")
-                if not card_id:
-                    logger.warning(f"{self.session_name} | Missing card id for {card.get('name')}, skipping")
-                    self.blacklist_cards.add(card.get("name", ""))
-                    continue
+                remaining_balance -= cost
 
-                cost = card.get("cost")
-                if cost is None:
-                    logger.warning(f"{self.session_name} | Missing cost info for {card['name']}, skipping")
-                    self.blacklist_cards.add(card["name"])
-                    continue
+                logger.info(f"{self.session_name} | {upgraded_cards}/{max_upgrade} | Upgrading Card {name} to lvl {picked['level']}" 
+                            f" | ROI: {roi:.5f} | Cost (<r>{cost:,}</r>/{remaining_balance:,})")
+                
 
-                if cost > self.coin_balance:
-                    logger.warning(f"{self.session_name} | Need more {(cost - self.coin_balance):,} before upgrading {card['name']} card")
-                    break
+                await self.Business_Upgrade(
+                    Card=picked,
+                    http_client=http_client
+                )
+                await asyncio.sleep(3)
 
-                remaining_balance = self.coin_balance - cost
-                if remaining_balance < settings.MIN_Balance:
-                    logger.warning(f"{self.session_name} | Stopped upgrading | Minimum balance ({settings.MIN_Balance:,}) would be breached")
-                    break
+                # Refresh info (balances/eligibility may change)
+                await self.Business_Info(http_client=http_client)
+                await asyncio.sleep(3)
 
-                logger.info(f"{self.session_name} | Upgrading {card['name']} to level {card['level']} (cost: {cost:,})")
-                await self.Business_Upgrade(Card_Id=card_id, Card_level=card['level'], http_client=http_client)
-                await asyncio.sleep(delay=3)
-                # Loop will refetch data before attempting the next upgrade
+                upgraded_cards += 1
+
+            if upgraded_cards >= 5:
+                await asyncio.sleep(3)
+                await self.improvement_info(http_client=http_client)
 
         except Exception as error:
             logger.error(f"{self.session_name} | Unknown error while upgrading businesses: {error}")
-            await asyncio.sleep(delay=3)
+            await asyncio.sleep(3)
+
 
     # async def Upgrade_Mining(self, buildingId, buildingtype, http_client: aiohttp.ClientSession):
     #     try:
@@ -456,7 +487,7 @@ class Tapper:
             response.raise_for_status()
             data= await response.json()
             taps= data['result']['nextImprovement']['currentLevel']
-            logger.success(f"{self.session_name} | Successfully Improved taps to {taps:,}(+{old:,}) Business Info")
+            logger.success(f"{self.session_name} | Successfully Improved taps to {taps:,}(+<g>{(taps - old):,}</g>)")
 
         except Exception as error:
             logger.error(f"{self.session_name} | Unknown error when Improve Tapping: {error}")
@@ -509,11 +540,12 @@ class Tapper:
                         balance_data = await self.balance(http_client=http_client)
 
                         balance = balance_data['coinsBalance']
+                        cpc = balance_data['coinsPerClick']
                         curr_energy = login_data['result']['currentEnergy']
                         limit_energy = login_data['result']['energyLimit']
 
                         logger.success(
-                            f"{self.session_name} | Login! | Balance: {balance:,} | Passive Earn: {login_data['result']['totalPassiveProfit']:,}  | Energy: {curr_energy:,}/{limit_energy:,}")
+                            f"{self.session_name} | Login! | Balance: {balance:,} | Passive Earn: {login_data['result']['totalPassiveProfit']:,} | CPC: {cpc:,} | Energy: {curr_energy:,}/{limit_energy:,}")
 
                         if login_data['result']['isCompletedNavigationOnboarding'] is False:
                             await self.complete_onboarding(http_client=http_client)
@@ -569,13 +601,14 @@ class Tapper:
 
                     if available_energy < settings.MIN_AVAILABLE_ENERGY:
                         logger.info(f"{self.session_name} | Minimum energy reached: {available_energy}")
-
+                        time_before = time()
+                        await self.balance(http_client=http_client)
                         await self.UPGRADE(http_client=http_client)
-                        await asyncio.sleep(delay=3)
-                        await self.improvement_info(http_client=http_client)
+                        time_after = time()
                         
+                        time_diff = time_after - time_before
                         # sleep_max = randint(a=settings.SLEEP_BY_MIN_ENERGY[0], b=settings.SLEEP_BY_MIN_ENERGY[1])
-                        sleep_limit = self.energyLimit / self.energyRegen
+                        sleep_limit = int(self.energyLimit / self.energyRegen) - int(time_diff)
                         sleep_max = randint(a=sleep_limit+60,b=sleep_limit+240)
                         logger.info(f"{self.session_name} | Sleep Limit: {sleep_limit} | Sleep {sleep_max}s")
 

@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     MIN_AVAILABLE_ENERGY: int = 100
     SLEEP_BY_MIN_ENERGY: list[int] = [1500, 2100]
 
+    MIN_Balance: int = 1000000000
+
     AUTO_UPGRADE_TAP: bool = True
     MAX_TAP_LEVEL: int = 10
     AUTO_UPGRADE_ENERGY: bool = True
