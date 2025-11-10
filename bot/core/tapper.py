@@ -157,14 +157,18 @@ class Tapper:
 
             days = await self.daily_reword(http_client=http_client)
             for day in days:
-                if day['isCurrent'] and day['status'] == "Earned":
+                if day['isCurrent']:
+                    if day['status'] == "Earned":
 
-                    response = await http_client.post(url="https://clicker-backend.tma.top/v2/tasks/everydayreward")
-                    response.raise_for_status()
-                    logger.success(f"{self.session_name} | Successfully Claimed Daily Reword {day['day']} {day['money']:,}")
-                else:
-                    logger.info(f"{self.session_name} | Daily Reword already claimed | Next in: {str(timedelta(seconds=day['secondLeft']))}")
-                    break
+                        response = await http_client.post(url="https://clicker-backend.tma.top/v2/tasks/everydayreward")
+                        response.raise_for_status()
+                        if response:
+                            logger.success(f"{self.session_name} | Successfully Claimed Daily Reword {day['day']} {day['money']:,}")
+                        else:
+                            logger.error(f"{self.session_name} | Error Claiming Daily Reword")
+                    else:
+                        logger.info(f"{self.session_name} | Daily Reword already claimed | Next in: {str(timedelta(seconds=day['secondLeft']))}")
+                        break
             
 
             # return await response.json()
