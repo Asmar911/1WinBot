@@ -157,7 +157,7 @@ class Tapper:
 
             days = await self.daily_reword(http_client=http_client)
             for day in days:
-                if day['isCurrent'] and day['status'] == "new":
+                if day['isCurrent'] and day['status'] == "Earned":
 
                     response = await http_client.post(url="https://clicker-backend.tma.top/v2/tasks/everydayreward")
                     response.raise_for_status()
